@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+	<!-- Classic logger: raise on DEBUG, INFO, WARN, ERROR and FATAL -->
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] - %m %n"/>
+		</layout>
+	</appender>
+	
+	<appender name="rolling" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="Gitre.log"/>
+		<param name="datePattern" value="'.'yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%thread] [%c] - %m %n"/>
+		</layout>
+	</appender>
+	
+	<!-- We want to asynchronously append the log (to avoid lag and freeze on the application) -->
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="500"/>
+		<appender-ref ref="stdout"/>
+		<appender-ref ref="rolling"/>
+    </appender>
+	
+	<!-- Root declaration -->
+	<root>
+		<priority value="debug"></priority>
+		<appender-ref ref="ASYNC"/>
+	</root>
+</log4j:configuration>
