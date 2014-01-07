@@ -21,3 +21,9 @@ Example:
 ```cmd
 java com.jroche.HtmlValidatorRunner --verbose --encoding UTF-16  
 ```
+
+
+Requirements
+==============
+
+You need to use at least Java 1.6 and to use Maven
