@@ -157,7 +157,7 @@ public class HtmlValidatorContext {
 						Set<File> directories = new HashSet<File>();
 						
 						for(String directoryPath : values) {
-							collectSubDirectories(new File(directoryPath), directories);
+							collectSubDirectories(new File(directoryPath.replaceAll("\\\"", "")), directories);
 						}
 						
 						this.directories = directories.toArray(new File[directories.size()]);
