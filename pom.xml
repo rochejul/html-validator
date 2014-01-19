@@ -7,7 +7,7 @@
 	<groupId>com.jroche</groupId>
 	<artifactId>html-validator</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
+	<version>1.1</version>
 
 	<name>HTML validator</name>
 	<description></description>
@@ -66,10 +66,30 @@
 				</configuration>
 			</plugin>
 
+			<!-- Compile as a jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.jroche.HtmlValidatorRunner</mainClass>
+						</manifest>
+
+						<manifestEntries>
+							<ReXSL-Version>${rexsl-w3c.version}</ReXSL-Version>
+							<ReXSL-Build>e0d9a06</ReXSL-Build>
+							<ReXSL-Date>2013-12-16 17:25</ReXSL-Date>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
 			<!-- Combine into one jar ! -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				
+
 				<executions>
 					<execution>
 						<id>make-assembly</id> <!-- this is used for inheritance merges -->
@@ -79,13 +99,20 @@
 						</goals>
 					</execution>
 				</executions>
-				
+
 				<configuration>
 					<archive>
 						<manifest>
 							<mainClass>com.jroche.HtmlValidatorRunner</mainClass>
 						</manifest>
+
+						<manifestEntries>
+							<ReXSL-Version>${rexsl-w3c.version}</ReXSL-Version>
+							<ReXSL-Build>e0d9a06</ReXSL-Build>
+							<ReXSL-Date>2013-12-16 17:25</ReXSL-Date>
+						</manifestEntries>
 					</archive>
+
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
@@ -119,12 +146,33 @@
 			<version>${jsoup.version}</version>
 		</dependency>
 		
+		<!-- JSR-303 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- JEE -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+
 		<!-- TESTS DEPENDENCIES -->
 		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>${junit.version}</version>
-		    <scope>test</scope>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
