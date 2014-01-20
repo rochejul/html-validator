@@ -1,7 +1,9 @@
 html-validator
 ==============
 
-Maven project to check the validaty of HTML files (based on the W3C API)
+Maven project to check the validaty of HTML files (based on the W3C API).
+
+*__IMPORTANT: this API needs an Internet connection, because we use the W3C SOAP API for that.__*
 
 You have to use the com.jroche.HtmlValidatorRunner with the following arguments:  
 
